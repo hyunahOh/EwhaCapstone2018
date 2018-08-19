@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText keywordEdt;
     private Button searchBtn;
     private List<Product> productList;
+    private Button sendbt;  //for test
+  //  private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();//for test
+    //private DatabaseReference databaseReference = firebaseDatabase.getReference();//for test
+
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     private ListView listView;
     private ProductAdapter adapter;
@@ -35,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(adapter);
         searchBtn.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 String keyword = keywordEdt.getText().toString();
@@ -44,7 +52,15 @@ public class MainActivity extends AppCompatActivity {
                 thread.start();
             }
         });
-    }
+
+        sendbt = (Button) findViewById(R.id.button2);//for test
+        sendbt.setOnClickListener(new Button.OnClickListener(){ //for test
+                    public void onClick(View v) {   //for test
+                        databaseReference.child("message").push().setValue("2");//for test
+                    }//for test
+                });//for test
+            }
+
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
         @SuppressLint("WrongConstant")
