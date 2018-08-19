@@ -41,12 +41,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Glide.with(mContext)
                 .asBitmap()
                 .load(mProducts.get(position).getProductImage())
-                .into(holder.product_img2);
-        holder.product_productName2.setText(mProducts.get(position).getProductName());
-        holder.product_price2.setText(mProducts.get(position).getProductPrice());
-        holder.product_seller2.setText(mProducts.get(position).getProductCode());
+                .into(holder.product_img);
+        holder.product_productName.setText(mProducts.get(position).getProductName());
+        holder.product_price.setText(mProducts.get(position).getProductPrice());
+        holder.product_seller.setText(mProducts.get(position).getProductCode());
 
-        holder.parentLayout2.setOnClickListener(new View.OnClickListener() {
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "clicked on : " + mProducts.get(position).getProductName());
@@ -62,17 +62,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView product_img2;
-        TextView product_productName2,product_price2,product_seller2;
-        RelativeLayout parentLayout2;
+        ImageView product_img;
+        TextView product_productName,product_price,product_seller;
+        RelativeLayout parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            parentLayout2 = itemView.findViewById(R.id.parent_layout2);
-            product_img2 = itemView.findViewById(R.id.product_img2);
-            product_productName2 = itemView.findViewById(R.id.product_productName2);
-            product_price2 = itemView.findViewById(R.id.product_price2);
-            product_seller2 = itemView.findViewById(R.id.product_seller2);
+            parentLayout = itemView.findViewById(R.id.parent_layout);
+            product_img = itemView.findViewById(R.id.product_img);
+            product_productName = itemView.findViewById(R.id.product_productName);
+            product_price = itemView.findViewById(R.id.product_price);
+            product_seller = itemView.findViewById(R.id.product_seller);
 
         }
     }
