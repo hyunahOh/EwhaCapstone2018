@@ -1,7 +1,5 @@
 package com.example.dowkk.apply11streetapi;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,7 +26,7 @@ public class SearchActivity extends AppCompatActivity {
     private Button searchBtn;
     private RecyclerViewAdapter adapter;
 
-     @Override
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);

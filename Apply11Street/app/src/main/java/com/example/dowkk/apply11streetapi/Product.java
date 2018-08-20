@@ -1,5 +1,8 @@
 package com.example.dowkk.apply11streetapi;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
 public class Product {
     private String productCode;
     private String productName;
@@ -13,7 +16,9 @@ public class Product {
     private String reviewCount;
     private String buySatisfy;
     private String benefit;
+    private String id;
 
+//  private @ServerTimestamp Date timestamp; //에러이유 모르겠음
     @Override
     public String toString() {
         return "Product [productCode=" + productCode + ", productName=" + productName + ", productImage=" + productImage
@@ -118,5 +123,9 @@ public class Product {
 
     public void setProductImage(String productImage) {
         this.productImage = productImage;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

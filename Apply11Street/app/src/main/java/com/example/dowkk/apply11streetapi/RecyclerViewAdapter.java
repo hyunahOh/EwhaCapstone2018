@@ -26,7 +26,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-
     public RecyclerViewAdapter(Context context, ArrayList<Product> products) {
         this.mProducts = products;
         this.mContext = context;
@@ -51,13 +50,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.product_price.setText(mProducts.get(position).getProductPrice());
         holder.product_seller.setText(mProducts.get(position).getProductCode());
 
+        final String title = mProducts.get(position).getProductName();
+        final String content = mProducts.get(position).getProductPrice();
+
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "clicked on : " + mProducts.get(position).getProductName());
                 Toast.makeText(mContext, mProducts.get(position).getProductName(), Toast.LENGTH_SHORT).show();
-                databaseReference.child("message").push().setValue(mProducts.get(position).getProductName());//for test
-
+                FirebaseHelper firebaseHelper = FirebaseHelper.getInstance();
+                firebaseHelper.setUserId("hyunah");
+                firebaseHelper.saveProduct(mProducts.get(position));
             }
         });
     }
@@ -80,7 +83,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             product_productName = itemView.findViewById(R.id.product_productName);
             product_price = itemView.findViewById(R.id.product_price);
             product_seller = itemView.findViewById(R.id.product_seller);
-
         }
     }
+
+
 }
