@@ -1,7 +1,5 @@
 package com.example.dowkk.apply11streetapi;
 
-import android.util.Log;
-
 public class Product {
     private String productCode;
     private String productName;
