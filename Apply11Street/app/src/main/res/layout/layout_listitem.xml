@@ -10,13 +10,21 @@
         android:id="@+id/product_img"
         android:src="@mipmap/ic_launcher"/>
 
+    <Button
+        android:id="@+id/btn_ocr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/product_img"
+        android:text="OCR" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:id="@+id/product_productName"
         android:text="상품명"
-        android:layout_toRightOf="@+id/product_img"
+        android:layout_toRightOf="@+id/btn_ocr"
         android:layout_alignParentTop="true"/>
 
     <TextView
@@ -36,4 +44,5 @@
         android:text="판매자"
         android:layout_below="@id/product_price"
         android:layout_alignLeft="@+id/product_productName"/>
+
 </RelativeLayout>
