@@ -1,9 +1,8 @@
 
 package com.example.dowkk.apply11streetapi.search;
 
-import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.dowkk.apply11streetapi.R;
-import com.example.dowkk.apply11streetapi.search.Product;
-import com.example.dowkk.apply11streetapi.search.ProductSearchService;
-import com.example.dowkk.apply11streetapi.search.ProductSearchThread;
-import com.example.dowkk.apply11streetapi.search.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +28,9 @@ public class SearchActivity extends AppCompatActivity {
     private Button searchBtn;
     private RecyclerViewAdapter adapter;
 
+    ProductSearchService service = new ProductSearchService();
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +44,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String keyword = keywordEdt.getText().toString();
-                ProductSearchService service = new ProductSearchService(keyword);
-                ProductSearchThread thread = new ProductSearchThread(service, handler);
-                thread.start();
-                initRecyclerView();
+                new SearchAsyncTask().execute(keyword);
             }
         });
     }
@@ -67,34 +62,25 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler(){
-        @SuppressLint("WrongConstant")
-        public void handleMessage(Message msg){
-            super.handleMessage(msg);
-            Log.d("test", String.valueOf(msg));
+    class SearchAsyncTask extends AsyncTask<String, Void, List<Product>> {
 
-            if(msg.what ==1 )
-            {
-                //arg1이 10이면 처음 검색에 대한 결과를 갖다 준걸로
-                if(msg.arg1==10)
-                {
-                    String result = "";
-                    List<Product> data = (List<Product>)msg.obj;
-                    for(Product p : data)
-                        result += p.getProductName() +"\n";
-                    //Toast.makeText(MainActivity.this, result, 0).show();
-                    //Toast.makeText(MainActivity.this, "dd", 0).show();
-                    mProducts.clear();
-                    mProducts.addAll((List<Product>) msg.obj);
-                    adapter.notifyDataSetChanged();
-                }
-//                arg2이 20이면 검색했던 결과에 대해 추가 아이템을 요청한걸로
-                if(msg.arg2==20){
+        @Override
+        protected List<Product> doInBackground(String... strings) {
+            String keyword = strings[0];
+            service.setKeyword(keyword);
 
-                }
-            }
+            List<Product> data = service.search();
+
+            return data;
         }
-    };
+
+        @Override
+        protected void onPostExecute(List<Product> obj) {
+            super.onPostExecute(obj);
+
+            mProducts.addAll(obj);
+            initRecyclerView();
+        }
+    }
 }
 

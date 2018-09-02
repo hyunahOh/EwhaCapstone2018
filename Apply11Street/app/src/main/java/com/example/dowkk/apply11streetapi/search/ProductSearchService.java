@@ -27,6 +27,8 @@ public class ProductSearchService {
     // 검색할 키워드
     private String keyword;
 
+    public ProductSearchService() {}
+
     public ProductSearchService(String keyword){
         this.keyword = keyword;
     }
@@ -141,4 +143,6 @@ public class ProductSearchService {
     public int getCurrentSkip() {
         return currentSkip;
     }
+
+    public void setKeyword(String keyword) { this.keyword = keyword; }
 }
