@@ -2,6 +2,7 @@ package com.example.dowkk.apply11streetapi.ocr;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 
 import android.net.*;
@@ -98,8 +99,10 @@ public class MainActivity extends Activity {
 			cur.moveToFirst();
 			imageFilePath = cur.getString(cur.getColumnIndex(MediaStore.Images.Media.DATA));
 			}
-			break;
+
+		break;
 		}
+		Log.e("tag", imageFilePath);
 
 		//Remove output file
 		deleteFile(resultUrl);

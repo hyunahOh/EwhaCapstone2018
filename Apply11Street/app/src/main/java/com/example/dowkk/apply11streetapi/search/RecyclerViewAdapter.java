@@ -3,6 +3,7 @@ package com.example.dowkk.apply11streetapi.search;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,10 +62,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "clicked on : " + mProducts.get(position).getProductName());
-                Toast.makeText(mContext, mProducts.get(position).getProductName(), Toast.LENGTH_SHORT).show();
                 FirebaseHelper firebaseHelper = FirebaseHelper.getInstance();
                 firebaseHelper.setUserId("hyunah");
                 firebaseHelper.saveProduct(mProducts.get(position));
+                Intent intent = new Intent(v.getContext(), InfoActivity.class);
+                intent.putExtra("productCode", mProducts.get(position).getProductCode());
+                mContext.startActivity(intent);
             }
         });
 
@@ -87,7 +90,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         ImageView product_img;
         TextView product_productName,product_price,product_seller;
-        RelativeLayout parentLayout;
+        ConstraintLayout parentLayout;
         Button btn_ocr;
 
 
@@ -95,9 +98,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             parentLayout = itemView.findViewById(R.id.parent_layout);
             product_img = itemView.findViewById(R.id.product_img);
-            product_productName = itemView.findViewById(R.id.product_productName);
-            product_price = itemView.findViewById(R.id.product_price);
-            product_seller = itemView.findViewById(R.id.product_seller);
+            product_productName = itemView.findViewById(R.id.txt_product_name);
+            product_price = itemView.findViewById(R.id.txt_product_price);
+            product_seller = itemView.findViewById(R.id.txt_product_seller);
             btn_ocr = itemView.findViewById(R.id.btn_ocr);
         }
     }

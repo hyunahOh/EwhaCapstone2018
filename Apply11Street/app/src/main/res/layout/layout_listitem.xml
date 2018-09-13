@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/parent_layout">
@@ -12,37 +14,43 @@
 
     <Button
         android:id="@+id/btn_ocr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="81dp"
+        android:layout_height="102dp"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/product_img"
-        android:text="OCR" />
+        android:text="OCR"
+        app:layout_constraintStart_toEndOf="@+id/product_img"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/product_productName"
-        android:text="상품명"
+        android:id="@+id/txt_product_name"
+        android:layout_width="183dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/btn_ocr"
-        android:layout_alignParentTop="true"/>
+        android:text="상품명"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_ocr"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:id="@+id/product_price"
+        android:id="@+id/txt_product_price"
+        android:layout_width="183dp"
+        android:layout_height="31dp"
+        android:layout_alignLeft="@+id/txt_product_name"
+        android:layout_below="@id/txt_product_name"
         android:text="가격"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/product_productName"
-        android:layout_alignLeft="@+id/product_productName"/>
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_ocr"
+        app:layout_constraintTop_toBottomOf="@+id/txt_product_seller" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_seller"
+        android:id="@+id/txt_product_seller"
+        android:layout_width="183dp"
+        android:layout_height="28dp"
+        android:layout_alignLeft="@+id/txt_product_name"
+        android:layout_below="@id/txt_product_price"
         android:text="판매자"
-        android:layout_below="@id/product_price"
-        android:layout_alignLeft="@+id/product_productName"/>
+        app:layout_constraintStart_toStartOf="@+id/txt_product_name"
+        app:layout_constraintTop_toBottomOf="@+id/txt_product_name" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

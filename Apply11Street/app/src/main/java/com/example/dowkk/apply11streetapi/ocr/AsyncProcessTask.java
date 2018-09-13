@@ -26,6 +26,7 @@ public class AsyncProcessTask extends AsyncTask<String, String, Boolean> {
 		dialog.setCancelable(false);
 		dialog.setCanceledOnTouchOutside(false);
 		dialog.show();
+
 	}
 
 	protected void onPostExecute(Boolean result) {
@@ -39,10 +40,12 @@ public class AsyncProcessTask extends AsyncTask<String, String, Boolean> {
 	@Override
 	protected Boolean doInBackground(String... args) {
 
+		//Log.println("", "doin", "doin");
 		String inputFile = args[0];
 		String outputFile = args[1];
 
 		try {
+
 			Client restClient = new Client();
 
 			// To create an application and obtain a password,
@@ -51,6 +54,7 @@ public class AsyncProcessTask extends AsyncTask<String, String, Boolean> {
 			// http://ocrsdk.com/documentation/faq/#faq3
 
 			// Name of application you created
+
 			restClient.applicationId = "rainbow37";
 			// You should get e-mail from ABBYY Cloud OCR SDK service with the application password
 			restClient.password = "I01kwFkek4V6Z+UdLcyWxAtr";
@@ -92,7 +96,7 @@ public class AsyncProcessTask extends AsyncTask<String, String, Boolean> {
 				publishProgress( "Downloading.." );
 				FileOutputStream fos = activity.openFileOutput(outputFile,Context.MODE_PRIVATE);
 				//Output here and send to Firebase!
-				
+
 				try {
 					restClient.downloadResult(task, fos);
 				} finally {
@@ -103,6 +107,7 @@ public class AsyncProcessTask extends AsyncTask<String, String, Boolean> {
 			} else if( task.Status == Task.TaskStatus.NotEnoughCredits ) {
 				throw new Exception( "Not enough credits to process task. Add more pages to your application's account." );
 			} else {
+
 				throw new Exception( "Task failed" );
 			}
 			
@@ -119,6 +124,7 @@ public class AsyncProcessTask extends AsyncTask<String, String, Boolean> {
 	protected void onProgressUpdate(String... values) {
 		// TODO Auto-generated method stub
 		String stage = values[0];
+
 		dialog.setMessage(stage);
 		// dialog.setProgress(values[0]);
 	}

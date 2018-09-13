@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ResultsActivity extends Activity {
 
@@ -23,11 +24,15 @@ public class ResultsActivity extends Activity {
 		setContentView(tv);
 		
 		String imageUrl = "unknown";
-		
+
+		Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+
 		Bundle extras = getIntent().getExtras();
 		if( extras != null) {
 			imageUrl = extras.getString("IMAGE_PATH" );
 			outputPath = extras.getString( "RESULT_PATH" );
+			Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+
 		}
 		
 		// Starting recognition process
@@ -35,8 +40,10 @@ public class ResultsActivity extends Activity {
 	}
 
 	public void updateResults(Boolean success) {
-		if (!success)
+		if (!success) {
+			//Toast.makeText(getApplicationContext(), "!success", Toast.LENGTH_SHORT).show();
 			return;
+		}
 		try {
 			StringBuffer contents = new StringBuffer();
 
