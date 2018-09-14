@@ -2,6 +2,7 @@ package com.example.dowkk.apply11streetapi.search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,14 @@ import com.example.dowkk.apply11streetapi.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
@@ -62,6 +71,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "clicked on : " + mProducts.get(position).getProductName());
+                //Log.e("img url", mProducts.get(position).getProductImage());
                 FirebaseHelper firebaseHelper = FirebaseHelper.getInstance();
                 firebaseHelper.setUserId("hyunah");
                 firebaseHelper.saveProduct(mProducts.get(position));
